@@ -2,8 +2,11 @@ package com.example.lab2_bhautikpethani_c0854487_android.service;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.lab2_bhautikpethani_c0854487_android.models.Product;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -35,15 +38,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addNewProduct(String name, String description, String price) {
+    public boolean addNewProduct(Product product) {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, name);
-        contentValues.put(COLUMN_DESC, description);
-        contentValues.put(COLUMN_PRICE, price);
+        contentValues.put(COLUMN_NAME, product.getName());
+        contentValues.put(COLUMN_DESC, product.getDescription());
+        contentValues.put(COLUMN_PRICE, product.getPrice());
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
     }
+
+    public boolean checkDBHasDataOrNot(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, TABLE_NAME);
+
+        if(count > 0){
+            return true;
+        }
+        return false;
+    }
+
 }
