@@ -26,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         insertCustomRecordsToDB();
+        showFirstProductsDetails();
+    }
+
+    private void showFirstProductsDetails(){
+        Product product = dbHelper.getFirstProduct();
+        binding.prodName.setText(product.getName());
+        binding.prodDesc.setText(product.getDescription());
+        binding.prodPrice.setText(String.valueOf(product.getPrice()));
     }
 
     private void insertCustomRecordsToDB(){

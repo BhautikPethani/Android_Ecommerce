@@ -2,6 +2,7 @@ package com.example.lab2_bhautikpethani_c0854487_android.service;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -58,6 +59,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
         return false;
+    }
+
+    public Product getFirstProduct(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME , null);
+        c.moveToFirst();
+        return new Product(
+                c.getInt(0),
+                c.getString(1),
+                c.getString(2),
+                c.getDouble(3));
     }
 
 }
