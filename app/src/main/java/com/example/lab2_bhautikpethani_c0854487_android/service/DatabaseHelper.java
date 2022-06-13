@@ -1,5 +1,6 @@
 package com.example.lab2_bhautikpethani_c0854487_android.service;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,5 +33,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sqlQuery = "DROP TABLE IF EXISTS " + TABLE_NAME + ";";
         sqLiteDatabase.execSQL(sqlQuery);
         onCreate(sqLiteDatabase);
+    }
+
+    public boolean addNewProduct(String name, String description, String price) {
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME, name);
+        contentValues.put(COLUMN_DESC, description);
+        contentValues.put(COLUMN_PRICE, price);
+
+        return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
     }
 }
