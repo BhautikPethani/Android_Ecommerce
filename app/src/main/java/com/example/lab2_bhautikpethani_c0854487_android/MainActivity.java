@@ -2,8 +2,10 @@ package com.example.lab2_bhautikpethani_c0854487_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.example.lab2_bhautikpethani_c0854487_android.databinding.ActivityMainBinding;
 import com.example.lab2_bhautikpethani_c0854487_android.models.Product;
@@ -59,4 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onDetailViewPressed(View view) {
+        startActivity(new Intent(this, ProductView.class));
+    }
 }

@@ -72,4 +72,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 c.getDouble(3));
     }
 
+    public Cursor getAllProducts() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+    }
 }
