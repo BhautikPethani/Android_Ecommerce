@@ -19,25 +19,29 @@
         android:id="@+id/txtPName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter product name" />
+        android:hint="Enter product name"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/txtPDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter product Description" />
+        android:hint="Enter product Description"
+        android:lines="2"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/txtPPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter product price" />
+        android:hint="Enter product price"
+        android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/btn_update"
+        android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="ADD" />
 
 
 </LinearLayout>

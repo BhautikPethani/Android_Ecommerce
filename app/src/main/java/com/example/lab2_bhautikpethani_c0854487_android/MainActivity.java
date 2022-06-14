@@ -1,11 +1,14 @@
 package com.example.lab2_bhautikpethani_c0854487_android;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.lab2_bhautikpethani_c0854487_android.databinding.ActivityMainBinding;
 import com.example.lab2_bhautikpethani_c0854487_android.models.Product;
@@ -63,5 +66,77 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDetailViewPressed(View view) {
         startActivity(new Intent(this, ProductView.class));
+    }
+
+    public void onAddButtonClicked(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View dialogView = layoutInflater.inflate(R.layout.add_new_product_dialog, null);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        final EditText txtPName = dialogView.findViewById(R.id.txtPName);
+        final EditText txtPDesc = dialogView.findViewById(R.id.txtPDesc);
+        final EditText txtPPrice = dialogView.findViewById(R.id.txtPPrice);
+
+        dialogView.findViewById(R.id.btnAdd).setOnClickListener(v -> {
+            String name = txtPName.getText().toString().trim();
+            String description = txtPDesc.getText().toString().trim();
+            String price = txtPPrice.getText().toString().trim();
+
+            if (name.isEmpty()) {
+                txtPName.setError("product name field can't be empty");
+                txtPName.requestFocus();
+                return;
+            }
+            if (description.isEmpty()) {
+                txtPDesc.setError("product description can't be empty");
+                txtPDesc.requestFocus();
+                return;
+            }
+            if (price.isEmpty()) {
+                txtPPrice.setError("product price can't be empty");
+                txtPPrice.requestFocus();
+                return;
+            }
+            if(!isNumeric(price)){
+                txtPPrice.setError("product price should be numeric");
+                txtPPrice.requestFocus();
+                return;
+            }
+
+            if(dbHelper.addNewProduct(new Product(-1, name, description, Double.parseDouble(price)))){
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        name+" has been added to products list.",
+                        Toast.LENGTH_LONG);
+
+                toast.show();
+            }else{
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        name+" couldn't add to product list.",
+                        Toast.LENGTH_LONG);
+
+                toast.show();
+            }
+
+            alertDialog.dismiss();
+        });
+    }
+
+    public static boolean isNumeric(String string) {
+        Double intValue;
+
+        if(string == null || string.equals("")) {
+            return false;
+        }
+
+        try {
+            intValue = Double.parseDouble(string);
+            return true;
+        } catch (NumberFormatException e) {
+
+        }
+        return false;
     }
 }

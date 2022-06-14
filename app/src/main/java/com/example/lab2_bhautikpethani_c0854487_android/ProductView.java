@@ -1,11 +1,14 @@
 package com.example.lab2_bhautikpethani_c0854487_android;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -26,6 +29,11 @@ public class ProductView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DatabaseHelper(this);
         productListView = findViewById(R.id.productListView);
@@ -82,5 +90,15 @@ public class ProductView extends AppCompatActivity {
             } while (cursor.moveToNext());
             cursor.close();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
