@@ -76,4 +76,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
+
+    public Cursor searchProducts(String keyword) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME +" LIKE '%"+keyword+"%' OR " + COLUMN_DESC + " LIKE '%"+keyword+"%'", null);
+    }
 }

@@ -11,6 +11,8 @@
         android:layout_width="378dp"
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="screen"
         android:ems="10"
         android:hint="Search by keyword"
         android:inputType="textPersonName"
@@ -21,10 +23,9 @@
 
     <ListView
         android:id="@+id/productListView"
-        android:layout_width="376dp"
-        android:layout_height="650dp"
+        android:layout_width="361dp"
+        android:layout_height="587dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSearch" />
