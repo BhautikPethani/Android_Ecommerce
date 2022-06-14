@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.lab2_bhautikpethani_c0854487_android.databinding.ActivityMainBinding;
 import com.example.lab2_bhautikpethani_c0854487_android.models.Product;
 import com.example.lab2_bhautikpethani_c0854487_android.service.DatabaseHelper;
+import com.example.lab2_bhautikpethani_c0854487_android.service.Utilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 txtPPrice.requestFocus();
                 return;
             }
-            if(!isNumeric(price)){
+            if(!Utilities.isNumeric(price)){
                 txtPPrice.setError("product price should be numeric");
                 txtPPrice.requestFocus();
                 return;
@@ -122,21 +123,5 @@ public class MainActivity extends AppCompatActivity {
 
             alertDialog.dismiss();
         });
-    }
-
-    public static boolean isNumeric(String string) {
-        Double intValue;
-
-        if(string == null || string.equals("")) {
-            return false;
-        }
-
-        try {
-            intValue = Double.parseDouble(string);
-            return true;
-        } catch (NumberFormatException e) {
-
-        }
-        return false;
     }
 }

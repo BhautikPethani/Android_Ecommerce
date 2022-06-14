@@ -72,6 +72,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 c.getDouble(3));
     }
 
+    public boolean updateProduct(Product product) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME, product.getName());
+        contentValues.put(COLUMN_DESC, product.getDescription());
+        contentValues.put(COLUMN_PRICE, String.valueOf(product.getPrice()));
+
+        return sqLiteDatabase.update(TABLE_NAME,
+                contentValues,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(product.getId())}) > 0;
+    }
+
     public boolean deleteProduct(int id) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase.delete(TABLE_NAME,
