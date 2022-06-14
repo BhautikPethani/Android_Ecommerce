@@ -72,6 +72,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 c.getDouble(3));
     }
 
+    public boolean deleteProduct(int id) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.delete(TABLE_NAME,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)}) > 0;
+    }
+
     public Cursor getAllProducts() {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
